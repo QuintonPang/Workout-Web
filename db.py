@@ -1,8 +1,14 @@
 import requests
 import json
 
-url = "https://gymweb-quintonpyx.harperdbcloud.com"
-authorization = "Basic YWRtaW46MTIzNDU2"
+# cloud
+# url = "https://workoutweb-quintonpyx.harperdbcloud.com"
+# authorization = 'Basic cXVpbnRvbnB5eDpRMjQwNTA0dWluQA=='
+
+#local 
+url = "http://localhost:9925"
+authorization= 'Basic cXVpbnRvbnB5eDpRMjQwNTA0dWlu'
+
 headers =  {
     'Content-Type': 'application/json',
     'Authorization': authorization
@@ -52,8 +58,8 @@ def insertOneWorkout(workoutId,workoutName, videoLink):
 def deleteOneWorkout(workoutId):
   payload = json.dumps({
     "operation": "delete",
-    "table": "workoutweb",
-    "schema": "workout",
+    "schema": "workoutweb",
+    "table": "workout",
     "hash_values": [
         workoutId
     ]
@@ -89,8 +95,10 @@ def selectAllWorkouts():
   response = requests.request("POST", url, headers=headers, data=payload)
 
   print(response.text)
+  return(response.json())
   
-def addToSchedule(scheduleId,date):
+# unused
+# def addToSchedule(scheduleId,date):
   payload = json.dumps({
     "operation": "insert",
     "schema": "workoutweb",
